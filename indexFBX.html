@@ -55,14 +55,14 @@
 			function init() {
 				container = document.createElement( 'div' );
 				document.body.appendChild( container );
-				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
+				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000000 );
 				camera.position.set( 100, 200, 300 );
 				controls = new THREE.OrbitControls( camera );
 				controls.target.set( 0, 100, 0 );
 				controls.update();
 				scene = new THREE.Scene();
 				scene.background = new THREE.Color( 0xa0a0a0 );
-				scene.fog = new THREE.Fog( 0xa0a0a0, 200, 1000 );
+				scene.fog = new THREE.Fog( 0xa0a0a0, 200, 3000 );
 				light = new THREE.HemisphereLight( 0xffffff, 0x444444 );
 				light.position.set( 0, 200, 0 );
 				scene.add( light );
@@ -76,18 +76,35 @@
 				scene.add( light );
 				// scene.add( new THREE.CameraHelper( light.shadow.camera ) );
 				// ground
-				var mesh = new THREE.Mesh( new THREE.PlaneBufferGeometry( 2000, 2000 ), new THREE.MeshPhongMaterial( { color: 0x999999, depthWrite: false } ) );
+				var mesh = new THREE.Mesh( new THREE.PlaneBufferGeometry( 6000, 6000 ), new THREE.MeshPhongMaterial( { color: 0x999999, depthWrite: false } ) );
 				mesh.rotation.x = - Math.PI / 2;
 				mesh.receiveShadow = true;
 				scene.add( mesh );
-				var grid = new THREE.GridHelper( 2000, 20, 0x000000, 0x000000 );
+				var grid = new THREE.GridHelper( 6000, 60, 0x000000, 0x000000 );
 				grid.material.opacity = 0.2;
 				grid.material.transparent = true;
 				scene.add( grid );
 				// model
                 var loader = new THREE.FBXLoader();
                 loader.load( 'assets/models/fbx/Idle.fbx', function ( object ) {
-				// loader.load( 'models/fbx/Samba Dancing.fbx', function ( object ) {
+				// loader.load( 'assets/models/fbx/86.fbx', function ( object ) {
+
+					object.mixer = new THREE.AnimationMixer( object );
+					mixers.push( object.mixer );
+					var action = object.mixer.clipAction( object.animations[ 0 ] );
+					action.play();
+					object.traverse( function ( child ) {
+						if ( child.isMesh ) {
+							child.castShadow = true;
+							child.receiveShadow = true;
+						}
+					} );
+					scene.add( object );
+				} );
+
+				loader.load( 'assets/models/fbx/Idle.fbx', function ( object ) {
+				// loader.load( 'assets/models/fbx/86.fbx', function ( object ) {
+
 					object.mixer = new THREE.AnimationMixer( object );
 					mixers.push( object.mixer );
 					var action = object.mixer.clipAction( object.animations[ 0 ] );
