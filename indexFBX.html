@@ -86,7 +86,7 @@
 				scene.add( grid );
 				// model
                 var loader = new THREE.FBXLoader();
-                loader.load( 'assets/models/fbx/Idle.fbx', function ( object ) {
+                loader.load( 'assets/models/fbx/PersonWalking.fbx', function ( object ) {
 				// loader.load( 'assets/models/fbx/86.fbx', function ( object ) {
 
 					object.mixer = new THREE.AnimationMixer( object );
@@ -102,21 +102,21 @@
 					scene.add( object );
 				} );
 
-				loader.load( 'assets/models/fbx/Idle.fbx', function ( object ) {
-				// loader.load( 'assets/models/fbx/86.fbx', function ( object ) {
+				// loader.load( 'assets/models/fbx/Idle.fbx', function ( object ) {
+				// // loader.load( 'assets/models/fbx/86.fbx', function ( object ) {
 
-					object.mixer = new THREE.AnimationMixer( object );
-					mixers.push( object.mixer );
-					var action = object.mixer.clipAction( object.animations[ 0 ] );
-					action.play();
-					object.traverse( function ( child ) {
-						if ( child.isMesh ) {
-							child.castShadow = true;
-							child.receiveShadow = true;
-						}
-					} );
-					scene.add( object );
-				} );
+				// 	object.mixer = new THREE.AnimationMixer( object );
+				// 	mixers.push( object.mixer );
+				// 	var action = object.mixer.clipAction( object.animations[ 0 ] );
+				// 	action.play();
+				// 	object.traverse( function ( child ) {
+				// 		if ( child.isMesh ) {
+				// 			child.castShadow = true;
+				// 			child.receiveShadow = true;
+				// 		}
+				// 	} );
+				// 	scene.add( object );
+				// } );
 				renderer = new THREE.WebGLRenderer( { antialias: true } );
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
