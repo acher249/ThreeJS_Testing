@@ -20,7 +20,7 @@
   "dependencies": {
     "heroku": "^7.39.5",
     "http-server": "^0.11.1",
-    "npm": "^6.2.0"
+    "npm": "^6.14.6"
   },
   "engines": {
     "node": "12.16.3"
