@@ -19,7 +19,7 @@
   "homepage": "https://github.com/acher249/ThreeJS_Testing#readme",
   "dependencies": {
     "heroku": "^7.39.5",
-    "http-server": "^0.11.1",
+    "http-server": "^0.11.2",
     "npm": "^6.2.0"
   },
   "engines": {
